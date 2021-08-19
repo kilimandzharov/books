@@ -11,7 +11,7 @@ export default function getSingleFetch(id) {
             authors: result.volumeInfo.authors,
             description: result.volumeInfo.description,
             categories: result.volumeInfo.categories,
-            source: result.volumeInfo.imageLinks.thumbnail
+            source: result.volumeInfo.imageLinks?.thumbnail
         }))
             .then(result => {
                 dispatch(loadSingleItemAction(result));
