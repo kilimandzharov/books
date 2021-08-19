@@ -22,7 +22,6 @@ const Content = React.memo((props) => {
             item.addEventListener('click', handleCardClick);
         }
         return () => {
-            console.log('unmount')
             for (let item of cards) {
                 item.removeEventListener('click', handleCardClick)
             }

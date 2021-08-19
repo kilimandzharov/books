@@ -17,10 +17,7 @@ function Search(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if(!value){
-            return
-        }
-        window.localStorage.setItem('scroll','1');
+        window.localStorage.setItem('scroll','0');
         console.log(window.localStorage);
         if (props.route !== 'cards') {
             setImmediate(() => props.setRoute('cards'));
@@ -58,14 +55,8 @@ function Search(props) {
                         if (props.route !== 'cards') {
                             setImmediate(() => props.setRoute('cards'));
                         }
-                        window.localStorage.setItem('scroll','1');
-                        const value = event.target.value;
-                        if (value === 'all') {
-                            dispatch(setCategoryAction(null));
-                        } else {
-                            dispatch(setCategoryAction(event.target.value));
-                        }
-
+                        window.localStorage.setItem('scroll','0');
+                        dispatch(setCategoryAction(event.target.value));
                         const {searchString, sortBy, category} = getInfoQuery();
                         if (searchString.length) {
                             const fetchingFunction = getFetchItems(searchString, sortBy, 0, category);
@@ -93,7 +84,7 @@ function Search(props) {
                         if (props.route !== 'cards') {
                             setImmediate(() => props.setRoute('cards'));
                         }
-                        window.localStorage.setItem('scroll','1');
+                        window.localStorage.setItem('scroll','0');
                         dispatch(setSortByAction(event.target.value));
                         const {searchString, sortBy, category} = getInfoQuery();
                         if (searchString.length) {

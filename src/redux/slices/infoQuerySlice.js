@@ -5,7 +5,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
     searchString: '',
     sortBy: 'relevance',
-    category: null,
+    category: 'all',
     bookId: null,
     totalItems:null,
     isAnswerEmpty:false
