@@ -27,7 +27,7 @@ function Search(props) {
             const sortElement = document.querySelector('.sortings');
             sortElement.value = 'relevance';
             categoryElement.value = 'all';
-            dispatch(setCategoryAction(null));
+            dispatch(setCategoryAction('all'));
             dispatch(setSortByAction('relevance'));
         }
         if(getInfoQuery().isAnswerEmpty){
