@@ -1,0 +1,26 @@
+.error{
+    padding:50px;
+    background-color: rgba(255, 111, 111, 0.3);
+    color:red;
+    margin:50px 10%;
+    font-family: "Segoe UI",sans-serif;
+    font-size: 30px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+.error img{
+    display: block;
+    height: 100px;
+    width: 100px;
+}
+
+@media screen and ( max-width: 960px ){
+    .error{
+        display: block;
+    }
+    .error img{
+        margin: 0 auto;
+    }
+}

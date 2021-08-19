@@ -1,0 +1,42 @@
+.book-page{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap:50px;
+    padding:40px 70px;
+}
+
+
+.book-page img{
+    justify-self: center;
+}
+
+.book-page div{
+    margin-bottom: 10px;
+
+}
+
+.book-page .title{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.book-page .description{
+    border:1px solid #c3c3c3;
+    padding:30px;
+    text-align: justify;
+}
+
+.book-info-container button{
+background-color: Transparent;
+cursor: pointer;
+border:none;
+position: fixed;
+}
+
+@media screen and ( max-width: 1000px ){
+    .book-page{
+        display: block;
+        text-align: center;
+    }
+}
+

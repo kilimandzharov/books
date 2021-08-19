@@ -1,0 +1,41 @@
+.card {
+    height: 300px;
+    background-color: rgb(250, 250, 250);
+    border: 1px solid #eaeaea;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.card img {
+    width: 120px;
+    box-shadow: 10px 10px 10px #7e7d7d;
+    height: 180px;
+}
+
+
+.title {
+    font-family: Rubik,sans-serif;
+}
+
+.group {
+    text-align: start;
+    color: lightgray;
+    margin: 10px 0;
+}
+
+.author {
+    font-size: 14px;
+    color: #b1b1b1;
+    margin-top:5px;
+}
+
+
+
+
+
+
+
+
