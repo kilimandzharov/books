@@ -1,22 +1,42 @@
 import {configureStore} from '@reduxjs/toolkit';
-import loadItemsReducer from "./slices/loadItemsSlice";
-import infoQueryReducer from "./slices/infoQuerySlice";
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage/session';
 import {createSelector} from 'reselect';
-import detailedInfoReducer from "./slices/detailedInfoSlice";
-import phaseReducer from "./slices/phaseSlice";
+import rootReducer from "./slices/rootReducer";
+
 
 const itemSelector = createSelector(state => state.items, (items) => items);
 const isEmpty = createSelector(state => state.infoQuery.isAnswerEmpty, result => result);
 const phaseSelector=createSelector(state =>state.phase,result=>result);
+
+const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 const store = configureStore({
-    reducer: {
-        items: loadItemsReducer,
-        infoQuery: infoQueryReducer,
-        detailedInfo: detailedInfoReducer,
-        phase: phaseReducer
-    }
-});
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
+})
+
+let persistor = persistStore(store)
 
 export default store;
-export {itemSelector, isEmpty,phaseSelector};
+export {itemSelector, isEmpty,phaseSelector,persistor};
 

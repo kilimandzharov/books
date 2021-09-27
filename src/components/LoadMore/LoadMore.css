@@ -9,3 +9,9 @@
     border:1px solid gray;
     cursor: pointer;
 }
+
+.loadmore:active{
+    border:1px solid #ff6f00;
+    color: #ffffff;
+    background-color: #d26a1f;
+}

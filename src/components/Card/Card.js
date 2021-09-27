@@ -3,13 +3,16 @@ import './Card.css';
 import {useDispatch} from "react-redux";
 import {setBookIdAction} from "../../redux/slices/infoQuerySlice";
 import {setLoadingAction} from "../../redux/slices/phaseSlice";
+import {useHistory} from "react-router-dom";
 
 const Card = React.memo((props) => {
     const dispatch=useDispatch();
+    const history = useHistory();
+
     function handleClick() {
         dispatch(setBookIdAction(props.id));
         dispatch(setLoadingAction());
-        props.setRoute('info');
+        history.push(`/home/${props.id}`);
     }
 
     return (

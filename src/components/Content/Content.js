@@ -45,8 +45,7 @@ const Content = React.memo((props) => {
                                                                            title={element.title}
                                                                            category={element.categories}
                                                                            source={element.image}
-                                                                           id={element.id}
-                                                                           setRoute={props.setRoute}/>)}
+                                                                           id={element.id}/>)}
                 </List>
                 {!!items.length && <LoadMore/>}
 

@@ -7,13 +7,19 @@ import getInfoQuery from "../../functions/getInfoQuery";
 import {phaseSelector} from "../../redux/store";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
+import {useHistory,useLocation} from "react-router-dom";
 
 function BookInfo(props) {
+    const path= useLocation().pathname.split("/");
+    const id = path[path.length-1];
+    console.log(id);
     const info = useSelector(detailedInfoSelector);
     const dispatch = useDispatch();
+    console.log("render BookInfo");
     const phase = useSelector(phaseSelector);
+    const history = useHistory();
     React.useEffect(() => {
-        const fetching = getSingleFetch(getInfoQuery().bookId);
+        const fetching = getSingleFetch(id);
         dispatch(fetching);
     }, []);
 
@@ -25,8 +31,6 @@ function BookInfo(props) {
     return (
         phase === 'active' ?
             <div className='book-info-container'>
-                <button className='book-button' onClick={() => props.setRoute('cards')}><img
-                    src="https://img.icons8.com/ios/50/000000/back--v1.png"/></button>
                 <div className='book-page'>
 
                     <img
@@ -39,7 +43,7 @@ function BookInfo(props) {
 
                     </div>
                 </div>
-            </div> : phase === 'loading'? < Spinner/> : <Error/>
+            </div> : phase === 'loading'? < Spinner/> : phase === "error" ? <Error/>:null
     )
 }
 

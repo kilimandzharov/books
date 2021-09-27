@@ -1,7 +1,7 @@
 import React from 'react';
 import './Search.css';
 import {getFetchItems} from "../../redux/getFetchItems";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     setCategoryAction,
     setIsAnswerEmptyAction,
@@ -9,19 +9,20 @@ import {
     setSortByAction
 } from "../../redux/slices/infoQuerySlice";
 import getInfoQuery from "../../functions/getInfoQuery";
+import {phaseSelector} from "../../redux/store";
 
 
 function Search(props) {
     const dispatch = useDispatch();
-    const [value, setValue] = React.useState('')
+    const string = getInfoQuery().searchString;
+    const [value, setValue] = React.useState(string);
+    const phase = useSelector(phaseSelector);
 
     function handleSubmit(event) {
         event.preventDefault();
         window.localStorage.setItem('scroll','0');
         console.log(window.localStorage);
-        if (props.route !== 'cards') {
-            setImmediate(() => props.setRoute('cards'));
-        }
+
         if (getInfoQuery().searchString.length) {
             const categoryElement = document.querySelector('.categories');
             const sortElement = document.querySelector('.sortings');
@@ -40,7 +41,7 @@ function Search(props) {
     }
 
     return (
-        <header className='search'>
+        <header className='search' style={{display:phase === "loading"?"none":"block"}} >
             <h1>Search Books</h1>
             <div className='search-container'>
                 <form onSubmit={handleSubmit}>
@@ -49,12 +50,10 @@ function Search(props) {
                     }} value={value}/>
                     <input type='submit' value='Search' id='submit'/>
                 </form>
-                <div>
+                <div className="select-container">
                     <span>Categories:</span>
                     <select className='categories' onChange={(event) => {
-                        if (props.route !== 'cards') {
-                            setImmediate(() => props.setRoute('cards'));
-                        }
+
                         window.localStorage.setItem('scroll','0');
                         dispatch(setCategoryAction(event.target.value));
                         const {searchString, sortBy, category} = getInfoQuery();
@@ -78,12 +77,11 @@ function Search(props) {
                         <option>poetry</option>
                     </select>
                 </div>
-                <div>
+                <div className="select-container" style={{justifySelf:"end",width:"100%"}} >
+
                     <span>Sort by:</span>
                     <select className='sortings' onChange={(event) => {
-                        if (props.route !== 'cards') {
-                            setImmediate(() => props.setRoute('cards'));
-                        }
+
                         window.localStorage.setItem('scroll','0');
                         dispatch(setSortByAction(event.target.value));
                         const {searchString, sortBy, category} = getInfoQuery();

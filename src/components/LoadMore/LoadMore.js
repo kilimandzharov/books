@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 function LoadMore(props) {
     const dispatch = useDispatch();
     const empty = useSelector(isEmpty);
-    console.log('render')
+
     return (
         !empty &&
         <button className='loadmore' onClick={() => {
